@@ -35,7 +35,7 @@ ReactDOM.render(JSX, document.getElementById('targetElement'))
 
 Would render the div containing the <h1>, <h3> and <p> on the HTML page in the location of the element with id 'targetElement'.
 
-- Learned to write a React component from scratch buy defining ES6 class which extends React.Component. Example:
+- Learned to write a React component from scratch by defining ES6 class which extends React.Component. Example:
 
 ```
 class MyComponent extends React.Component{
@@ -58,3 +58,60 @@ Must include a render method, inside which is a return statement as above.
 
     Note that, unlike rendering HTML elements assigned to variables, React components when used as parameters must be passed with HTML tags.
 
+- Learned to pass props to a stateless functional component. These can then be accessed when rendering the component within other components (i.e. React Components). Example:
+
+```
+const AllAboutMe = (props) => {
+    return(
+        <div>
+        <h2>My name is {props.name}</h2>
+        <h4>I am {props.mood}</h4>
+        </div>
+    )
+}
+
+class MyComponent extends React.Component{
+    render(){
+        return(
+            <div>
+            <h1>A little about me...</h1>
+            <AllAboutMe name="Ash Robinson" mood="Happy"/>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<MyComponent />, document.getElementById('top-section'))
+```
+
+Would render the headings 'My name is Ash Robinson' and 'I am happy' to the element with id top-section.
+
+    - Can apply default props:
+    ```
+    AllAboutMe.defaultProps = {name:"John Doe", mood:"Anonymous"};
+    ```
+    Now if AllAboutMe were rendered and no props specified, we'd expect to see the headings 'My name is John Doe' and 'I am anonymous' rendered to the element with id top-section.
+
+    - Can require a specific type of prop:
+    ```
+    AllAboutMe.propTypes = {name: PropTypes.string.isRequired}
+    ```
+    Would throw error if name was not given as a string.
+
+    - When passing props to an ES6 class rather than a functional component, this. must be used. Example:
+
+    ```
+    class AllAboutMe extends React.Component{
+        constructor(props) {
+            super(props);
+        }
+        render(){
+            return(
+                <div>
+                <h2>My name is {this.props.name}</h2>
+                <h4>I am {this.props.mood}</h4>
+                </div>
+                )
+        }
+    }
+    ```

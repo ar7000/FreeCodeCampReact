@@ -164,3 +164,37 @@ Will render "My name is Ash Robinson." as a h3 element, followed by "I am thirty
         }
     };
     ```
+
+- Learned to alter state values with setState and bind the 'this' keyword to the a class in order that it may be used in class methods. Prevents method from returning undefined. Example:
+```
+class MyComponent extends React.Component {
+        
+        constructor(props){
+            super(props);
+            this.state = {
+            name:"Ash Robinson",
+            age: "thirty"
+            }
+            this.oneYearOlder = this.oneYearOlder.bind(this);
+        }
+        oneYearOlder(){
+            this.setState({
+                age:"thirty-one"
+            });
+        }
+
+        render(){
+            const name = this.state.name;
+            const age = this.state.age;
+            return(
+                <div>
+                    <h3>My name is {name}.</h3>
+                    <p>I am {age} years old.</p>
+                    <button onClick={this.oneYearOlder}>Add a year...</button>
+                </div>
+            )
+        }
+    };
+```
+
+On clicking the button the p element will change to "I am thirty-one years old."

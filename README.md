@@ -33,7 +33,7 @@ const JSX = (
 ReactDOM.render(JSX, document.getElementById('targetElement'))
 ```
 
-Would render the div containing the <h1>, <h3> and <p> on the HTML page in the location of the element with id 'targetElement'.
+Would render the div containing the h1, h3 and p on the HTML page in the location of the element with id 'targetElement'.
 
 - Learned to write a React component from scratch by defining ES6 class which extends React.Component. Example:
 

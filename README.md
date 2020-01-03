@@ -115,3 +115,52 @@ Would render the headings 'My name is Ash Robinson' and 'I am happy' to the elem
         }
     }
     ```
+
+- Learned how to declare state on a component, assign data to the state and then call that data within the component. Example:
+
+```
+class MyComponent extends React.Component {
+  constructor(props){
+      super(props);
+      this.state = {
+          name:"Ash Robinson",
+          age: "thirty"
+      }
+  }
+  render(){
+      return(
+          <div>
+              <h3>My name is {this.state.name}.</h3>
+              <p>I am {this.state.age} years old.</p>
+          </div>
+      )
+  }
+};
+```
+
+Will render "My name is Ash Robinson." as a h3 element, followed by "I am thirty years old." as a p element.
+
+    - State information can also be called with variables, written as Javascript directly. These must be declared after the render method:
+    ```
+    class MyComponent extends React.Component {
+        
+        constructor(props){
+            super(props);
+            this.state = {
+            name:"Ash Robinson",
+            age: "thirty"
+            }
+        }
+
+        render(){
+            const name = this.state.name;
+            const age = this.state.age;
+            return(
+                <div>
+                    <h3>My name is {name}.</h3>
+                    <p>I am {age} years old.</p>
+                </div>
+            )
+        }
+    };
+    ```

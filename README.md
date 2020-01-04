@@ -198,3 +198,43 @@ class MyComponent extends React.Component {
 ```
 
 On clicking the button the p element will change to "I am thirty-one years old."
+
+- Learned to toggle an element between the booleans true and false by using state. Done by passing an anonymous function to setState. Example:
+
+```
+class MyComponent extends React.Component {
+  constructor(props){
+        super(props)
+        this.state = {
+            display: false
+        }
+        this.clickFunc = this.clickFunc.bind(this);
+    }
+
+    clickFunc(){
+      this.setState(currentState => ({
+        display: !currentState.display
+      }))
+    }
+
+    render(){
+        if(this.state.display){
+            return(
+            <div>
+                <h1>Current status:</h1>
+                <h3>I am true.</h3>
+                <button onClick={this.clickFunc}>Make it false</button>
+            </div>
+        ) } else {
+            return(
+            <div>
+                <h1>Current status:</h1>
+                <h3>I am false.</h3>
+                <button onClick={this.clickFunc}>Make it true</button>
+            </div>
+        )
+        }
+        }
+};
+```
+Will flip between the two different return values indicated above by calling setState via the clickFunc method. The setState within clickFunc also has its own anonymous function which takes the current state, including all its key value pairs, as an argument, then re-assigns the display value by telling it to not (!) be the value held within currentState. In other words false becomes true and vice-versa.

@@ -238,3 +238,53 @@ class MyComponent extends React.Component {
 };
 ```
 Will flip between the two different return values indicated above by calling setState via the clickFunc method. The setState within clickFunc also has its own anonymous function which takes the current state, including all its key value pairs, as an argument, then re-assigns the display value by telling it to not (!) be the value held within currentState. In other words false becomes true and vice-versa.
+
+- Learned how to pass state and methods from a parent to child components. Example:
+
+```
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    name:"Bob Ross",
+    likes:["painting", "animals", "trees"]
+  }
+}
+
+render() {
+  return (
+    <div>
+    <Introduction name={this.state.name} likes={this.state.likes}/>
+    </div>
+  );
+  }
+};
+
+class Introduction extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const name = this.props.name;
+    const likes = this.props.likes;
+    return (
+      <div>
+        <h3>My name is {name},</h3>
+        <p>and I like {likes.slice(0,likes.length-1).join(', ')} and {likes.slice(likes.length-1)}.</p>
+      </div>
+    );
+  }
+};
+```
+
+Will now render an h3 element contiang the text "My name is Bob Ross," and a p element containing "and I like painting, animals and trees".
+
+    - Can also pass methods to children in the same way. For example to add a click action when calling a parent's method on a child component we say:
+    ```
+    <button onClick={this.props.clickAction} />
+    ```
+    Then pass the method as a prop in the parent component:
+    ```
+    <ChildComponent clickAction={this.clickMethod} />
+    ```
+    This example assumes clickMethod has been declared as a method on the parent component.

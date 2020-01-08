@@ -288,3 +288,64 @@ Will now render an h3 element contiang the text "My name is Bob Ross," and a p e
     <ChildComponent clickAction={this.clickMethod} />
     ```
     This example assumes clickMethod has been declared as a method on the parent component.
+
+- Learned to use Life Cycle Method componentWillMount. Is declared on a component and is called prior to initial render. Useful when wanting to handle confuguration or declare state. Example:
+```
+class Person extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        censoredMode: false
+    }
+  }
+
+  componentWillMount(){
+      if(this.props.age < 18){
+          this.setState({censoredMode:true})
+      }
+  }
+
+  if(this.state.censoredMode === true){
+      render(){
+          <h2>Nothing to see here...</h2>
+      }
+  } else {
+      render(){
+          <h2>Step inside...</h2>
+          <button>Enter</button>
+      }
+  }
+
+};
+```
+
+The above example uses componentWillMount() to verify user's age and render a h2 containing "Nothing to see here..." if they are under 18.
+
+- Learned to use componentDidMount Life Cycle method. This is useful when needing to access elements of a component that are not accessible prior to initial render. Example:
+
+```
+class MyComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            joke:"Why did the chicken cross the road?"
+        };
+    }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                joke:"To get to the other side!"
+            });
+        }, 5000);
+    }
+    render() {
+        return (
+            <div>
+                <h1>{this.state.joke}</h1>
+            </div>
+        );
+    }
+};  
+```
+
+The above will render the joke question, then after 5 seconds will automatically change the string into the answer.

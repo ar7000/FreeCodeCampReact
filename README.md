@@ -349,3 +349,50 @@ class MyComponent extends React.Component {
 ```
 
 The above will render the joke question, then after 5 seconds will automatically change the string into the answer.
+
+- Learned basics of styloing directly within react.
+    - Can be declared inline, similarly to HTML. Example:
+    ```
+    class MyComponent extends React.Component {
+        
+        constructor(props) {
+            super(props);
+        }
+
+        render(){
+
+            return(
+                <div style={{color:"red",fontSize:50}}>
+                This is a styled sentence.
+                </div>
+            )
+        
+        }
+    };  
+    ```
+
+    - Can also be declared as an object assigned to a variable and called by enclosing variable name in braces (meaning it will be ready as JS, not JSX):
+    ```
+    class MyComponent extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {
+            textColor:"green"
+            }
+        }
+        
+        render(){
+        
+            const textStyles = {color:"red", fontSize:50}
+            
+            return(
+                <div style={textStyles}>
+                This is a styled sentence.
+                </div>
+            )
+        
+        }
+    };
+    ```
+    - Syntax varies from classic CSS. Many values need to be passed as strings. Numbers are by default treated as a pixel value. For any other CSS size types quotes must be used, i.e. {fontSize:"50%"}.
